@@ -15,8 +15,19 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import Link from "next/link";
 
+interface Artist {
+  id: number;
+  name: string;
+  bio: string;
+  image: string;
+  category: string;
+  location: string;
+  language: string;
+  feeRange: string;
+}
+
 export default function Artists() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const cardsPerView = 3;
   const maxIndex = Math.max(0, artists.length - cardsPerView);
 
@@ -59,7 +70,7 @@ export default function Artists() {
               damping: 30,
             }}
           >
-            {artists.map((artist, index) => (
+            {artists.map((artist: Artist, index: number) => (
               <motion.div
                 key={artist.id}
                 className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3"
@@ -150,7 +161,7 @@ export default function Artists() {
 
         {/* Pagination Dots */}
         <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+          {Array.from({ length: maxIndex + 1 }).map((_, index: number) => (
             <button
               key={index}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
@@ -159,6 +170,7 @@ export default function Artists() {
                   : "bg-slate-300 hover:bg-slate-400"
               }`}
               onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>

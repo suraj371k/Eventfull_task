@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ChevronLeft, User, MapPin, Globe, DollarSign, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,9 +13,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useBookingStore } from "@/store/bookingStore";
 import toast from "react-hot-toast";
 
-export default function ArtistDetail({ params }: { params: { id: string } }) {
+export default function ArtistDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params);
   const router = useRouter();
-  const artist = artists.find(a => a.id === Number(params.id));
+  const artist = artists.find(a => a.id === Number(id));
   const { addBooking } = useBookingStore();
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
