@@ -40,7 +40,7 @@ export default function ArtistDetail({ params }: { params: Promise<{ id: string 
     </div>
   );
 
-  const renderInfoItem = (Icon: any, value: string, color?: string) => (
+  const renderInfoItem = (Icon: React.ElementType, value: string, color?: string) => (
     <div className="flex items-center gap-2">
       <Icon className={`w-5 h-5 ${color || "text-slate-500"}`} />
       <span className="text-slate-700 dark:text-slate-300">{value}</span>

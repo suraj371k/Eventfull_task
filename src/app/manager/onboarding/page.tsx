@@ -39,6 +39,16 @@ const schema = z.object({
   profileImage: z.any().optional(),
 });
 
+type ArtistOnboardingFormValues = {
+  name: string;
+  bio: string;
+  categories: string[];
+  languages: string[];
+  feeRange: string;
+  location: string;
+  profileImage?: File;
+};
+
 export default function ArtistForm() {
   const {
     register,
@@ -60,9 +70,9 @@ export default function ArtistForm() {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ArtistOnboardingFormValues) => {
     console.log("Artist Submitted:", data);
-    toast.success("Form submitted check console for output")
+    toast.success("Form submitted check console for output");
   };
 
   const [categoryOpen, setCategoryOpen] = useState(false);
